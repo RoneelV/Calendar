@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/EventsList",
+  "definitions": {
+    "EventsList": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/CalendarEvent" }
+    },
+    "CalendarEvent": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "description": "The unique identifier for the event",
+          "type": "string"
+        },
+        "eventName": {
+          "type": "string"
+        },
+        "eventDate": {
+          "$comment": "Does not contain any timezone info. Prefer to store them in one uniform timezone. Low priority for now",
+          "description": "The event date, in the format yyyy-MM-dd",
+          "type": "string",
+          "format": "date"
+        },
+        "startTime": {
+          "description": "The start time of the event, in the format HH:mm:ssxxx",
+          "type": "string",
+          "format": "time"
+        },
+        "endTime": {
+          "description": "The end time of the event",
+          "type": "string",
+          "format": "time"
+        },
+        "hasRegistered": {
+          "description": "If the user has registered for the event",
+          "type": "boolean"
+        },
+        "imageURL": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "instructors": {
+          "description": "The list of instructors for the event",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "tags": {
+          "description": "The tags for the event",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "seatsLeft": {
+          "description": "The number of seats left for the event",
+          "type": "integer"
+        },
+        "totalAttendees": {
+          "description": "The number of people attending the event",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "eventId",
+        "eventName",
+        "eventDate",
+        "startTime",
+        "endTime",
+        "hasRegistered",
+        "imageURL",
+        "instructors"
+      ],
+      "title": "CalendarEvent"
+    }
+  }
+}
