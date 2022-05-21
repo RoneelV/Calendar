@@ -69,7 +69,9 @@ const eventFactory = () => {
     startTime: formatISO(startTime, { representation: 'time' }),
     endTime: formatISO(endTime, { representation: 'time' }),
     hasRegistered: faker.datatype.boolean(),
-    imageURL: 'https://loremflickr.com/640/480/people',
+    imageURL:
+      'https://loremflickr.com/640/480/people?random=' +
+      faker.random.alphaNumeric(5),
     instructors,
     tags: faker.helpers.arrayElements(
       [
