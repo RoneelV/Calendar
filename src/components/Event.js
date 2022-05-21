@@ -15,8 +15,8 @@ const RegisteredBadge = () => (
  * @param {{icon: string, text: string}} param
  */
 const InfoWithIcon = ({ icon, text }) => (
-  <span className="flex space-x-2">
-    <img className="h-5" src={icon} alt="alt not provided" />
+  <span className="flex space-x-2 items-center">
+    <img className="h-5" src={icon} alt="" aria-hidden={true} />
     <p className="body-s">{text}</p>
   </span>
 );
@@ -26,7 +26,11 @@ const InfoWithIcon = ({ icon, text }) => (
  * Shows filling fast orange seat icon if seats left are less than 10
  * @param {{hasRegistered: boolean, seatsLeft: number?, totalAttendees: number?}} param
  */
-const SeatsRegistrations = ({ hasRegistered, seatsLeft, totalAttendees }) => {
+const RegisteredOrSeatsInfo = ({
+  hasRegistered,
+  seatsLeft,
+  totalAttendees,
+}) => {
   if (hasRegistered) {
     return (
       <div className="mt-[10px]">
@@ -35,18 +39,18 @@ const SeatsRegistrations = ({ hasRegistered, seatsLeft, totalAttendees }) => {
     );
   }
 
-  if (!totalAttendees && !seatsLeft) return <></>;
+  if (totalAttendees == undefined && seatsLeft == undefined) return <></>;
 
   return (
     <div className="mt-3">
       <div className="flex w-fit space-x-8">
-        {totalAttendees && (
+        {totalAttendees != undefined && (
           <InfoWithIcon
             icon={peopleIcon}
             text={`${totalAttendees} attending`}
           />
         )}
-        {seatsLeft &&
+        {seatsLeft != undefined &&
           (seatsLeft < 10 ? (
             <InfoWithIcon icon={hotSeatIcon} text={`${seatsLeft} seats left`} />
           ) : (
@@ -59,7 +63,7 @@ const SeatsRegistrations = ({ hasRegistered, seatsLeft, totalAttendees }) => {
 
 /**
  * Shows start time, end time and duration in the required formats
- * @param {{eventDate: string, startTime: string, endTime: string}} param
+ * @param {{eventDate: string, startTime: string?, endTime: string?}} param
  */
 const EventTimeInfo = ({ eventDate, startTime, endTime }) => {
   const parsedStartTime = parseISO(eventDate + 'T' + startTime);
@@ -81,30 +85,33 @@ const EventTimeInfo = ({ eventDate, startTime, endTime }) => {
   );
 };
 
+/** @param {{event: import('../mockEvents').event}} param */
 const Event = ({ event }) => (
-  <article className="flex w-fit p-8 rounded-xl hover:bg-[#fafafa]">
+  <article className="flex w-full p-6 rounded-xl hover:bg-[#fafafa]">
     <img
-      src={event?.imageURL}
+      src={event.imageURL}
       alt="Event banner"
       className="object-cover rounded-lg h-[6.75rem] w-36"
+      loading="lazy"
     />
 
-    <div className="ml-6 pt-2">
-      <h3 className="heading-s text-[#222222] mb-2">{event?.eventName}</h3>
+    <div className="ml-6 pt-2 w-fit">
+      <h3 className="heading-s text-[#222222] mb-2">{event.eventName}</h3>
 
       <EventTimeInfo
-        eventDate={event?.eventDate}
+        eventDate={event.eventDate}
         startTime={event.startTime}
         endTime={event.endTime}
       />
 
-      <SeatsRegistrations
-        hasRegistered={event?.hasRegistered}
-        seatsLeft={event?.seatsLeft}
-        totalAttendees={event?.totalAttendees}
+      <RegisteredOrSeatsInfo
+        hasRegistered={event.hasRegistered}
+        seatsLeft={event.seatsLeft}
+        totalAttendees={event.totalAttendees}
       />
     </div>
   </article>
 );
 
 export default Event;
+export { EventTimeInfo, RegisteredOrSeatsInfo }; // for testing
