@@ -1,0 +1,13 @@
+{
+    "files": ["./src/index.js"],
+    "include": ["./images.d.ts"],
+    "compilerOptions": {
+      "checkJs": true,               /* Report errors in .js files. */
+      "allowJs": true,               /* Allow parsing javascript. */
+      "noEmit": true,                /* Do not emit outputs. */
+      "jsx": "react-jsx",
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "moduleResolution": "Node",
+    }
+}
