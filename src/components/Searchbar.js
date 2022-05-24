@@ -5,10 +5,10 @@ import closeIcon from '../assets/close.svg';
  * @param {{searchQuery: string, setSearchQuery: Function}} param
  */
 const Searchbar = ({ searchQuery, setSearchQuery }) => (
-  <div className="flex flex-col items-start w-60 h-10 py-[0.5625rem] pl-4 pr-3 border border-[#eaeaea] rounded-[1.25rem] hover:border-black">
+  <div className="flex flex-col items-start w-60 h-10 py-[0.5625rem] pl-4 pr-3 border border-border-default rounded-[1.25rem] hover:border-black">
     <div className="flex flex-row space-x-1 h-fit items-center self-stretch">
       <div className="flex flex-row items-start space-x-3 grow">
-        <div className="pt-[0.0625rem] w-5">
+        <div className="pt-px w-5">
           <img src={searchIcon} alt="Magnifier icon" />
         </div>
 
@@ -25,7 +25,7 @@ const Searchbar = ({ searchQuery, setSearchQuery }) => (
       {searchQuery != '' && (
         <img
           src={closeIcon}
-          className="w-5 hover:bg-[#f2f2f2]"
+          className="w-5 hover:bg-bg-tertiary"
           alt="Close button icon to clear the search input"
           onClick={() => {
             setSearchQuery('');

@@ -31,14 +31,14 @@ const EventList = ({ displayEvents, splitIndex, startDate }) => {
     <div className="flex flex-col space-y-[4.5rem]">
       {noUpcomingEvents ? (
         <div className="flex flex-col space-y-[4.5rem]">
-          <h1 className="heading-s ml-6 text-[#999999] max-w-xs">
+          <h1 className="heading-s ml-6 text-placeholder max-w-xs">
             No sessions scheduled {format(parseISO(startDate), 'EEEE, d MMMM')}{' '}
             onwards
           </h1>
         </div>
       ) : (
         !dateEvents[startDate] && (
-          <h1 className="heading-s ml-6 text-[#999999] max-w-xs">
+          <h1 className="heading-s ml-6 text-placeholder max-w-xs">
             No sessions scheduled for{' '}
             {format(parseISO(startDate), 'EEEE, d MMMM')}
           </h1>
@@ -57,7 +57,7 @@ const EventList = ({ displayEvents, splitIndex, startDate }) => {
           <div className="flex flex-col">
             {events.map((event, index) => (
               <Fragment key={'event-' + event.eventId}>
-                {index > 0 ? <hr className="text-[#eaeaea]" /> : <></>}
+                {index > 0 ? <hr className="text-border-default" /> : <></>}
                 <Event event={event} />
               </Fragment>
             ))}

@@ -16,22 +16,24 @@ code {
     monospace;
 }
 
-.heading-s {
-  @apply font-semibold text-lg leading-[1.625rem];
-}
+@layer utilities {
+  .heading-s {
+    @apply font-semibold text-lg leading-[1.625rem];
+  }
 
-.heading-xs {
-  @apply font-semibold text-base;
-}
+  .heading-xs {
+    @apply font-semibold text-base;
+  }
 
-.heading-xxs {
-  @apply font-semibold text-sm leading-[1.125rem];
-}
+  .heading-xxs {
+    @apply font-semibold text-sm leading-[1.125rem];
+  }
 
-.body-s {
-  @apply text-sm leading-[1.375rem];
-}
+  .body-s {
+    @apply text-sm leading-[1.375rem];
+  }
 
-.scrollbar-none {
-  scrollbar-width: none;
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
 }

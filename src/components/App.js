@@ -1,8 +1,9 @@
-import { useMemo, useState, useTransition } from 'react';
+import React, { useMemo, useState, useTransition } from 'react';
 import EventList from './EventList';
 import Loading from './Loading';
 import Filters from './Filters';
 import Searchbar from './Searchbar';
+import MiniCalendar from './MiniCalendar';
 import initialEventsList from '../eventsList.json';
 import { formatISO } from 'date-fns';
 import { useFilters } from '../utils/useFilters';
@@ -32,29 +33,39 @@ function App() {
   );
 
   // input states
-  /** @type {[string[], Function]} */
+  /** @type {[string[], React.Dispatch<React.SetStateAction<string[]>]} */
   const [checkedTags, setCheckedTags] = useState([]);
-  /** @type {[string[], Function]} */
+  /** @type {[string[], React.Dispatch<React.SetStateAction<string[]>]} */
   const [checkedStatus, setCheckedStatus] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  // eslint-disable-next-line
   const [selectedDate, setSelectedDate] = useState(
     formatISO(new Date(), { representation: 'date' })
   );
 
   const [isPending, startTransition] = useTransition();
 
-  const deferredSetSearchQuery = (searchQuery) => {
-    startTransition(() => setSearchQuery(searchQuery));
-  };
-  const deferredSetCheckedTags = (checkedTags) => {
-    startTransition(() => setCheckedTags(checkedTags));
-  };
-  const deferredSetCheckedStatus = (checkedStatus) => {
-    startTransition(() => setCheckedStatus(checkedStatus));
-  };
+  /** @type {(fn: (...args: any[]) => void) => ((...args: any[]) => void)} */
+  const getDeferredFn =
+    (fn) =>
+    (...args) =>
+      startTransition(() => fn(...args));
+
+  const deferredSetSearchQuery = getDeferredFn(setSearchQuery);
+  const deferredSetCheckedTags = getDeferredFn(setCheckedTags);
+  const deferredSetCheckedStatus = getDeferredFn(setCheckedStatus);
+  const deferredSetSelectedDate = getDeferredFn(setSelectedDate);
+
+  const datesWithEvents = useMemo(
+    () =>
+      eventsList.reduce(
+        (prev, cur) =>
+          prev.includes(cur.eventDate) ? prev : [...prev, cur.eventDate],
+        []
+      ),
+    [eventsList]
+  );
 
   const [filteredEvents, areFiltersActive] = useFilters(
     eventsList,
@@ -88,11 +99,18 @@ function App() {
       {isPending ? (
         <Loading />
       ) : (
-        <EventList
-          displayEvents={displayEvents}
-          splitIndex={splitIndex}
-          startDate={selectedDate}
-        />
+        <div className="flex justify-between">
+          <EventList
+            displayEvents={displayEvents}
+            splitIndex={splitIndex}
+            startDate={selectedDate}
+          />
+          <MiniCalendar
+            selectedDateString={selectedDate}
+            setSelectedDate={deferredSetSelectedDate}
+            datesWithEvents={datesWithEvents}
+          />
+        </div>
       )}
     </div>
   );

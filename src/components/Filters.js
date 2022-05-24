@@ -11,7 +11,7 @@ const RoundedBadge = ({ text, className = '', onClick }) => (
     }
     {...(onClick != undefined && { role: 'button', onClick })}
   >
-    <p className="body-s text-[#222222]">{text}</p>
+    <p className="body-s text-paragraph">{text}</p>
   </div>
 );
 
@@ -36,7 +36,7 @@ const StatusCheckBox = ({ text, toggle, checked, iconColor }) => (
           <rect width="10" height="10" rx="2" fill={iconColor} />
         </svg>
 
-        <p className="body-s text-[#666666]">{text}</p>
+        <p className="body-s text-secondary">{text}</p>
       </div>
       <div className="relative">
         <input
@@ -114,7 +114,7 @@ const DropDownButton = ({ globalCheckedStatus, setGlobalCheckedStatus }) => {
           (open
             ? 'top-full opacity-100 visible'
             : 'top-[110%] invisible opacity-0') +
-          'absolute flex flex-col space-y-[0.125rem] justify-center left-0 z-40 mt-2 w-60 rounded-lg border border-[#eaeaea] bg-white px-2 pt-2 pb-[0.125rem] shadow-card transition-all'
+          'absolute flex flex-col space-y-0.5 justify-center left-0 z-40 mt-2 w-60 rounded-lg border border-border-default bg-white px-2 pt-2 pb-0.5 shadow-card transition-all'
         }
       >
         {statusData.map(({ status, iconColor }) => (
@@ -136,7 +136,7 @@ const DropDownButton = ({ globalCheckedStatus, setGlobalCheckedStatus }) => {
         </div>
         <div className="flex space-x-16 items-center justify-around py-3">
           <button
-            className="heading-xxs text-[#999999]"
+            className="heading-xxs text-placeholder"
             onClick={() => setCheckedStatus([])}
           >
             Clear
@@ -179,7 +179,7 @@ const TagCheckBox = ({ text, toggle, checked }) => {
       <RoundedBadge
         text={text}
         className={
-          'bg-[#f2f2f2] hover:border-2' +
+          'bg-bg-tertiary hover:border-2' +
           (checked ? ' border-2 border-black' : '')
         }
       />
@@ -203,7 +203,7 @@ const Filters = ({
         globalCheckedStatus={checkedStatus}
         setGlobalCheckedStatus={setCheckedStatus}
       />
-      <p className="p-1 text-[#eaeaea]">|</p>
+      <p className="p-1 text-border-default">|</p>
       {Object.keys(tags).map((tag) => (
         <TagCheckBox
           key={'tag-' + tag}

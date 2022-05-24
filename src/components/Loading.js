@@ -1,7 +1,7 @@
 const LoadingParagraph = ({ className = '' }) => (
   <div
     className={
-      'w-[9.5rem] h-[0.875rem] bg-[#f2f2f2] rounded-[0.1875rem] ' + className
+      'w-[9.5rem] h-[0.875rem] bg-bg-tertiary rounded-[0.1875rem] ' + className
     }
     role="presentation"
   ></div>
@@ -9,16 +9,16 @@ const LoadingParagraph = ({ className = '' }) => (
 
 const LoadingInfoWithIcon = () => (
   <span className="flex space-x-2 items-center">
-    <div className="h-[1.125rem] w-[1.125rem] bg-[#f2f2f2] rounded-full" />
+    <div className="h-[1.125rem] w-[1.125rem] bg-bg-tertiary rounded-full" />
     <LoadingParagraph className="w-[6.25rem]" />
   </span>
 );
 
 const LoadingEvent = () => (
   <div className="flex w-full p-6 rounded-xl" role="presentation">
-    <div className="bg-[#f2f2f2] rounded-lg h-[6.75rem] w-36" />
+    <div className="bg-bg-tertiary rounded-lg h-[6.75rem] w-36" />
     <div className="ml-[1.5625rem] pt-2 w-fit">
-      <div className="h-5 w-[25rem] bg-[#f2f2f2] rounded-[0.3125rem] mb-[1.0625rem]"></div>
+      <div className="h-5 w-[25rem] bg-bg-tertiary rounded-[0.3125rem] mb-[1.0625rem]"></div>
       <div className="flex space-x-3">
         <LoadingParagraph />
         <LoadingParagraph />

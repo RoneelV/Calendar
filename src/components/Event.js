@@ -5,8 +5,8 @@ import seatIcon from '../assets/seat-normal.svg';
 import hotSeatIcon from '../assets/seat-orange.svg';
 
 const RegisteredBadge = () => (
-  <div className="flex w-fit px-3 py-0.5 h-6 rounded-[22px] backdrop-blur-[10px] bg-[#444444]">
-    <p className="leading-5 uppercase text-[12px] font-semibold text-[#f2f2f2] tracking-widest">
+  <div className="flex w-fit px-3 py-0.5 h-6 rounded-[1.375rem] backdrop-blur-[0.625rem] bg-bg-info">
+    <p className="uppercase text-xs leading-5 font-semibold text-bg-tertiary tracking-widest">
       REGISTERED
     </p>
   </div>
@@ -34,7 +34,7 @@ const RegisteredOrSeatsInfo = ({
 }) => {
   if (hasRegistered) {
     return (
-      <div className="mt-[10px]">
+      <div className="mt-[0.625rem]">
         <RegisteredBadge />
       </div>
     );
@@ -88,7 +88,7 @@ const EventTimeInfo = ({ eventDate, startTime, endTime }) => {
 
 /** @param {{event: import('../mockEvents').event}} param */
 const Event = ({ event }) => (
-  <article className="flex w-full p-6 rounded-xl hover:bg-[#fafafa]">
+  <article className="flex w-full p-6 rounded-xl hover:bg-bg-secondary">
     <img
       src={event.imageURL}
       alt="Event banner"
@@ -97,7 +97,7 @@ const Event = ({ event }) => (
     />
 
     <div className="ml-6 pt-2 w-fit">
-      <h3 className="heading-s text-[#222222] mb-2">{event.eventName}</h3>
+      <h3 className="heading-s text-paragraph mb-2">{event.eventName}</h3>
 
       <EventTimeInfo
         eventDate={event.eventDate}
