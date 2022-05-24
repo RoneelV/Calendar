@@ -24,6 +24,14 @@ code {
   @apply font-semibold text-base;
 }
 
+.heading-xxs {
+  @apply font-semibold text-sm leading-[1.125rem];
+}
+
 .body-s {
   @apply text-sm leading-[1.375rem];
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
 }

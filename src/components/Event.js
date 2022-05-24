@@ -1,4 +1,5 @@
 import { format, intervalToDuration, parseISO } from 'date-fns';
+import { getEventStatus } from '../utils/getEventStatus';
 import peopleIcon from '../assets/people.svg';
 import seatIcon from '../assets/seat-normal.svg';
 import hotSeatIcon from '../assets/seat-orange.svg';
@@ -24,7 +25,7 @@ const InfoWithIcon = ({ icon, text }) => (
 /**
  * Shows Registered Badge if registered, otherwise Seats left and Total attendees info
  * Shows filling fast orange seat icon if seats left are less than 10
- * @param {{hasRegistered: boolean, seatsLeft: number?, totalAttendees: number?}} param
+ * @param {{hasRegistered: boolean, seatsLeft?: number, totalAttendees?: number}} param
  */
 const RegisteredOrSeatsInfo = ({
   hasRegistered,
@@ -51,7 +52,7 @@ const RegisteredOrSeatsInfo = ({
           />
         )}
         {seatsLeft != undefined &&
-          (seatsLeft < 10 ? (
+          (getEventStatus(seatsLeft, hasRegistered) == 'Filling fast' ? (
             <InfoWithIcon icon={hotSeatIcon} text={`${seatsLeft} seats left`} />
           ) : (
             <InfoWithIcon icon={seatIcon} text={`${seatsLeft} seats left`} />
@@ -63,7 +64,7 @@ const RegisteredOrSeatsInfo = ({
 
 /**
  * Shows start time, end time and duration in the required formats
- * @param {{eventDate: string, startTime: string?, endTime: string?}} param
+ * @param {{eventDate: string, startTime: string, endTime: string}} param
  */
 const EventTimeInfo = ({ eventDate, startTime, endTime }) => {
   const parsedStartTime = parseISO(eventDate + 'T' + startTime);
