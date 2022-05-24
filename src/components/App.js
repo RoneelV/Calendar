@@ -33,9 +33,9 @@ function App() {
   );
 
   // input states
-  /** @type {[string[], React.Dispatch<React.SetStateAction<string[]>]} */
+  /** @type {[string[], React.Dispatch<React.SetStateAction<string[]>>]} */
   const [checkedTags, setCheckedTags] = useState([]);
-  /** @type {[string[], React.Dispatch<React.SetStateAction<string[]>]} */
+  /** @type {[string[], React.Dispatch<React.SetStateAction<string[]>>]} */
   const [checkedStatus, setCheckedStatus] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState('');
